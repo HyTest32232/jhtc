@@ -5,11 +5,12 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as ec
 
 class VideoPage(BasePage):
+        _username_locator = (By.CSS_SELECTOR,"#form > div.formmiddle > div:nth-child(2) > div > input")
         def create_get_video(self,name):
             self.find(By.ID, "tab-1").click()
             self.find(By.ID, "upload").send_keys("D:\工作\code\data\国家重点·公办院校.mp4")
             sleep(1)
-            self.find(By.CSS_SELECTOR,"#form > div.formmiddle > div:nth-child(2) > div > input").send_keys(name)
+            self.find(self._username_locator).send_keys(name)
             # 选择群组Test1
             self.driver.execute_script('document.querySelector("#form > div.formmiddle > div:nth-child(3) > div > div > input").click()')
             sleep(1)

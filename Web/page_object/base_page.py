@@ -19,11 +19,14 @@ class BasePage:
             self.driver = base_driver
             self.driver.implicitly_wait(2)
 
-    def find(self,by,locator):
+    def find(self,by,locator=None):
         """
         封装查找操作
         :return:
         """
-        web_ele = self.driver.find_element(by=by,value=locator)
+        if locator==None:
+            web_ele = self.driver.find_element(*by)
+        else:
+            web_ele = self.driver.find_element(by=by,value=locator)
         print(f'查找到元素为{web_ele}')
         return self.driver.find_element(by=by,value=locator)
