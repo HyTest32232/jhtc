@@ -24,9 +24,9 @@ class BasePage:
         封装查找操作
         :return:
         """
-        if locator==None:
+        if locator == None:
             web_ele = self.driver.find_element(*by)
         else:
             web_ele = self.driver.find_element(by=by,value=locator)
         print(f'查找到元素为{web_ele}')
-        return self.driver.find_element(by=by,value=locator)
+        return web_ele
