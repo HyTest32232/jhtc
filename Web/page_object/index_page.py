@@ -20,7 +20,7 @@ class IndexPage(BasePage):
         跳转至视频页
         :return:
         """
-        self.driver.find_element(By.XPATH,'//*[@id="app"]/div/div[1]/div/div[2]/ul/div[2]/li').click()
+        self.find(By.XPATH,'//*[@id="app"]/div/div[1]/div/div[2]/ul/div[2]/li').click()
         return VideoPage()
 
     def go_to_serve_page(self):
@@ -35,5 +35,5 @@ class IndexPage(BasePage):
         跳转至我的
         :return:
         """
-        self.driver.find_element(By.XPATH,'//*[@id="app"]/div/div[1]/div/div[2]/ul/div[5]').click()
+        self.find(By.XPATH,'//*[@id="app"]/div/div[1]/div/div[2]/ul/div[5]').click()
         return MyPage(self.driver)

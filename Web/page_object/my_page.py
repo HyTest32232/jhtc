@@ -8,5 +8,5 @@ from Web.page_object.video_page import VideoPage
 
 class MyPage(BasePage):
     def go_to_video_manage(self):
-        self.driver.find_element(By.CSS_SELECTOR,'#app > div > div:nth-child(2) > div > div.left > div > div.barlist > div:nth-child(4)').click()
+        self.find(By.CSS_SELECTOR,'#app > div > div:nth-child(2) > div > div.left > div > div.barlist > div:nth-child(4)').click()
         return VideoPage(self.driver)
