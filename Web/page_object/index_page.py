@@ -8,6 +8,7 @@ from Web.page_object.serve_page import ServePage
 
 
 class IndexPage(BasePage):
+    _base_url = "https://www.netimedia.cn/#/login"
     def go_to_online_page(self):
         """
         跳转至直播页

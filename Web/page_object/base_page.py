@@ -6,10 +6,11 @@ from selenium.webdriver.remote.webdriver import WebDriver
 
 
 class BasePage:
+    _base_url = ""
     def __init__(self,base_driver:WebDriver=None):
         if base_driver == None:
             self.driver = webdriver.Chrome()
-            self.driver.get("https://www.netimedia.cn/#/login")
+            self.driver.get(self._base_url)
             self.driver.implicitly_wait(3)
             self.driver.maximize_window()
             self.driver.find_element(By.XPATH, '//*[@id="register"]/form/div[1]/div/div/input').send_keys("17388321779")
