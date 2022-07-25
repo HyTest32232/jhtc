@@ -1,8 +1,7 @@
 from time import sleep
 from selenium.webdriver.common.by import By
 from Web.page_object.base_page import BasePage
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as ec
+
 
 class VideoPage(BasePage):
         _username_locator = (By.CSS_SELECTOR,"#form > div.formmiddle > div:nth-child(2) > div > input")

@@ -3,7 +3,7 @@ from selenium.webdriver.common.by import By
 from Web.page_object.base_page import BasePage
 from Web.page_object.my_page import MyPage
 from Web.page_object.online_page import OnlinePage
-from Web.page_object.video_page import VideoPage
+from Web.page_object.video_manage_page import VideoPage
 from Web.page_object.serve_page import ServePage
 
 
