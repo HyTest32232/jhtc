@@ -11,15 +11,15 @@ class VideoPage(BasePage):
             self.find(By.ID, "upload").send_keys("D:\工作\code\data\国家重点·公办院校.mp4")
             sleep(1)
             self.find(self._username_locator).send_keys(name)
-            # 选择群组Test1
+            # 选择群组
             self.driver.execute_script('document.querySelector("#form > div.formmiddle > div:nth-child(3) > div > div > input").click()')
             sleep(1)
             self.find(By.CSS_SELECTOR,'body>div.el-select-dropdown.el-popper > div.el-scrollbar > div.el-select-dropdown__wrap.el-scrollbar__wrap > ul > li:nth-child(6)').click()
-            # 选择机构test_1
+            # 选择机构
             self.driver.execute_script('document.querySelector("#form > div.formmiddle > div:nth-child(4) > div > div>input").click()')
             sleep(1)
             self.driver.execute_script('document.querySelector("body > div:nth-child(7) > div.el-scrollbar > div.el-select-dropdown__wrap.el-scrollbar__wrap > ul > li:nth-child(1)").click()')
-            # 选择栏目公告栏
+            # 选择栏目
             self.find(By.CSS_SELECTOR,"#form > div.formmiddle > div:nth-child(5) > div > div > input").click()
             sleep(1)
             self.driver.execute_script('document.querySelector("body > div:nth-child(8) > div.el-scrollbar > div.el-select-dropdown__wrap.el-scrollbar__wrap > ul > li:nth-child(1)").click()')
