@@ -69,37 +69,78 @@ class OrganizationPage(BasePage):
         orgs_list = list(zip(org_list,group_list))
         return orgs_list
 
-    def add_members(self,name,phone):
+    def add_part(self,name):
+        """
+        创建栏目
+        :return:
+        """
+        self.find(By.CSS_SELECTOR,"#tab-7").click()
+        #获取群组
+        self.find(By.CSS_SELECTOR,"#form4 > div.formmiddle > div:nth-child(1) > div > div > span > span > i").click()
+        self.find(By.CSS_SELECTOR,"body > div:nth-child(9) > div.el-scrollbar > div.el-select-dropdown__wrap.el-scrollbar__wrap > ul > li:last-child").click()
+        sleep(2)
+        #获取机构
+        self.find(By.CSS_SELECTOR,"#form4 > div.formmiddle > div:nth-child(2) > div > div > span > span > i").click()
+        self.find(By.CSS_SELECTOR,"body > div:nth-child(10) > div.el-scrollbar > div.el-select-dropdown__wrap.el-scrollbar__wrap > ul > li:first-child").click()
+        self.find(By.CSS_SELECTOR,"#form4 > div.formmiddle > div:nth-child(3) > div > input").send_keys(name)
+        self.find(By.CSS_SELECTOR,"#form4 > div.radioinfo > div.formbutton > button").click()
+        while True:
+            sleep(2)
+            try:
+                self.find(By.CSS_SELECTOR,"body > div.el-message.el-message--success").is_displayed()
+                break
+            except Exception as e:
+                print("加载中...")
+        return self.get_part()
+    def get_part(self):
+        """
+        获取栏目
+        :return:
+        """
+        self.find(By.CSS_SELECTOR,"#tab-8").click()
+        parts = self.driver.find_elements(By.CSS_SELECTOR,"#pane-8 > div.columnManage > div.memberManage_box > div > div.memberManage_text > p:nth-child(1)")
+        orgs = self.driver.find_elements(By.CSS_SELECTOR,"#pane-8 > div.columnManage > div.memberManage_box > div > div.memberManage_text > p:nth-child(3) > b")
+        parts
+
+
+
+
+    def add_members(self, name, phone):
         """
         添加成员
         :return:
         """
-        #选择群组
-        self.find(By.CSS_SELECTOR,'#form1 > div.formmiddle > div:nth-child(1) > div > div').click()
+        self.find(By.CSS_SELECTOR,"#tab-1").click()
+        # 选择群组
+        self.find(By.CSS_SELECTOR, '#form1 > div.formmiddle > div:nth-child(1) > div > div').click()
         sleep(1)
-        self.find(By.CSS_SELECTOR,'body > div.el-select-dropdown.el-popper > div.el-scrollbar > div.el-select-dropdown__wrap.el-scrollbar__wrap > ul > li:last-child').click()
-        #选择机构
-        self.find(By.CSS_SELECTOR,'#form1 > div.formmiddle > div:nth-child(2) > div > div.el-input.el-input--suffix > span > span > i').click()
+        self.find(By.CSS_SELECTOR,
+                  'body > div.el-select-dropdown.el-popper > div.el-scrollbar > div.el-select-dropdown__wrap.el-scrollbar__wrap > ul > li:last-child').click()
+        # 选择机构
+        self.find(By.CSS_SELECTOR,
+                  '#form1 > div.formmiddle > div:nth-child(2) > div > div.el-input.el-input--suffix > span > span > i').click()
         sleep(1)
-        self.find(By.CSS_SELECTOR,'body > div.el-select-dropdown.el-popper.is-multiple > div.el-scrollbar > div.el-select-dropdown__wrap.el-scrollbar__wrap > ul > li:first-child').click()
-        self.find(By.CSS_SELECTOR,'#form1 > div.formmiddle > div:nth-child(3) > div > input').send_keys(name)
-        self.find(By.CSS_SELECTOR,"#form1 > div.formmiddle > div:nth-child(4) > div > input").send_keys(phone)
-        self.find(By.CSS_SELECTOR,"#form1 > div.radioinfo > div.formbutton > button").click()
+        self.find(By.CSS_SELECTOR,
+                  'body > div.el-select-dropdown.el-popper.is-multiple > div.el-scrollbar > div.el-select-dropdown__wrap.el-scrollbar__wrap > ul > li:first-child').click()
+        self.find(By.CSS_SELECTOR, '#form1 > div.formmiddle > div:nth-child(3) > div > input').send_keys(name)
+        self.find(By.CSS_SELECTOR, "#form1 > div.formmiddle > div:nth-child(4) > div > input").send_keys(phone)
+        self.find(By.CSS_SELECTOR, "#form1 > div.radioinfo > div.formbutton > button").click()
         sleep(1)
         return self.get_members()
+
     def get_members(self):
         """
         获取成员
         :return:
         """
-        self.find(By.CSS_SELECTOR,"#tab-2").click()
-        groups = self.driver.find_elements(By.CSS_SELECTOR,"#pane-2 > div > div > p:nth-child(3)")
-        users = self.driver.find_elements(By.CSS_SELECTOR,"#pane-2 > div > div > p:nth-child(2)")
+        self.find(By.CSS_SELECTOR, "#tab-2").click()
+        groups = self.driver.find_elements(By.CSS_SELECTOR, "#pane-2 > div > div > p:nth-child(3)")
+        users = self.driver.find_elements(By.CSS_SELECTOR, "#pane-2 > div > div > p:nth-child(2)")
         group_list = []
-        user_list =[]
+        user_list = []
         for group in groups:
             group_list.append(group.text)
         for user in users:
             user_list.append(user.text)
-        users_list = list(zip(group_list,user_list))
+        users_list = list(zip(group_list, user_list))
         return users_list
