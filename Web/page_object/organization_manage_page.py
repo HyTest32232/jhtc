@@ -98,12 +98,16 @@ class OrganizationPage(BasePage):
         :return:
         """
         self.find(By.CSS_SELECTOR,"#tab-8").click()
+        parts_list = []
+        orgs_list = []
         parts = self.driver.find_elements(By.CSS_SELECTOR,"#pane-8 > div.columnManage > div.memberManage_box > div > div.memberManage_text > p:nth-child(1)")
         orgs = self.driver.find_elements(By.CSS_SELECTOR,"#pane-8 > div.columnManage > div.memberManage_box > div > div.memberManage_text > p:nth-child(3) > b")
-        parts
-
-
-
+        for part in parts:
+            parts_list.append(part.text)
+        for org in orgs:
+            orgs_list.append(org.text)
+        part_list = list(zip(parts_list,orgs_list))
+        return part_list
 
     def add_members(self, name, phone):
         """

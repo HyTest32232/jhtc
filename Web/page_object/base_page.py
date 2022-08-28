@@ -1,14 +1,18 @@
-from time import sleep
-import yaml
+import configparser
+import os
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.remote.webdriver import WebDriver
-
+from selenium.webdriver.chrome.options import Options
 
 class BasePage:
     _base_url = ""
-    def __init__(self,base_driver:WebDriver=None):
+    def __init__(self,base_driver:WebDriver=None,):
+        # config = configparser.ConfigParser()
+        # config.read(os.path.join(os.environ['USERPROFILE'], 'iselenium.ini'))
         if base_driver == None:
+            # chrome_options = Options()
+            # chrome_options.add_argument("--headless")
             self.driver = webdriver.Chrome()
             self.driver.get(self._base_url)
             self.driver.implicitly_wait(3)
@@ -19,6 +23,7 @@ class BasePage:
         else:
             self.driver = base_driver
             self.driver.implicitly_wait(2)
+
 
     def find(self,by,locator=None):
         """

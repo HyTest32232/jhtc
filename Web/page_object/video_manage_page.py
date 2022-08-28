@@ -5,7 +5,6 @@ from Web.page_object.base_page import BasePage
 
 class VideoPage(BasePage):
         _username_locator = (By.CSS_SELECTOR,"#form > div.formmiddle > div:nth-child(2) > div > input")
-
         def create_get_video(self,name):
             self.find(By.ID, "tab-1").click()
             self.find(By.ID, "upload").send_keys("D:\工作\code\data\国家重点·公办院校.mp4")
