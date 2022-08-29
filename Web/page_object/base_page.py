@@ -8,12 +8,12 @@ from selenium.webdriver.chrome.options import Options
 class BasePage:
     _base_url = ""
     def __init__(self,base_driver:WebDriver=None,):
-        # config = configparser.ConfigParser()
-        # config.read(os.path.join(os.environ['USERPROFILE'], 'iselenium.ini'))
+        config = configparser.ConfigParser()
+        config.read(os.path.join(os.environ['USERPROFILE'], 'iselenium.ini'))
         if base_driver == None:
-            # chrome_options = Options()
-            # chrome_options.add_argument("--headless")
-            self.driver = webdriver.Chrome()
+            chrome_options = Options()
+            chrome_options.add_argument("--headless")
+            self.driver = webdriver.Chrome(options=chrome_options)
             self.driver.get(self._base_url)
             self.driver.implicitly_wait(3)
             self.driver.maximize_window()
