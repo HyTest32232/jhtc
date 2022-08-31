@@ -8,8 +8,6 @@ from selenium.webdriver.chrome.options import Options
 class BasePage:
     _base_url = ""
     def __init__(self,base_driver:WebDriver=None,):
-        config = configparser.ConfigParser()
-        config.read(os.path.join(os.environ['USERPROFILE'], 'iselenium.ini'))
         if base_driver == None:
             chrome_options = Options()
             chrome_options.add_argument("--headless")
