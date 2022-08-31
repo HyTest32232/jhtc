@@ -1,5 +1,3 @@
-import configparser
-import os
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.remote.webdriver import WebDriver
@@ -11,7 +9,8 @@ class BasePage:
         if base_driver == None:
             chrome_options = Options()
             chrome_options.add_argument("--headless")
-            chrome_options.add_argument('--no-sandbox')
+            chrome_options.add_argument("--no-sandbox")
+            chrome_options.add_argument("--disable-gpu")
             self.driver = webdriver.Chrome(options=chrome_options)
             self.driver.get(self._base_url)
             self.driver.implicitly_wait(3)
@@ -22,7 +21,6 @@ class BasePage:
         else:
             self.driver = base_driver
             self.driver.implicitly_wait(2)
-
 
     def find(self,by,locator=None):
         """

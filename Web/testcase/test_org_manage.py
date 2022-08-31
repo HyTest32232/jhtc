@@ -1,6 +1,3 @@
-from selenium import webdriver
-from Web.page_object.index_page import IndexPage
-import pytest
 
 class TestOrgManage:
     def test_add_group_success(self,get_index):
