@@ -13,6 +13,7 @@ class BasePage:
         if base_driver == None:
             chrome_options = Options()
             chrome_options.add_argument("--headless")
+            chrome_options.add_argument('--no-sandbox')
             self.driver = webdriver.Chrome(options=chrome_options)
             self.driver.get(self._base_url)
             self.driver.implicitly_wait(3)
