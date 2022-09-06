@@ -11,8 +11,6 @@ from selenium.webdriver.chrome.options import Options
 class BasePage:
     _base_url = ""
     def __init__(self,base_driver:WebDriver=None):
-        config = configparser.ConfigParser()
-        config.read(os.path.join(os.environ['USERPROFILE'],'iselenium.ini'))
         chrome_options = Options()
         chrome_options.add_argument("no-sandbox")
         chrome_options.add_argument("disable-gpu")
@@ -28,6 +26,8 @@ class BasePage:
                 self.driver = webdriver.Chrome(options=chrome_options)
             #hub模式
             elif broswer is not None and broswer.lower() == 'remote':
+                config = configparser.ConfigParser()
+                config.read(os.path.join(os.environ['USERPROFILE'], 'iselenium.ini'))
                 docker_remote = config.get('driver','remote')
                 self.driver = webdriver.Remote(command_executor=docker_remote,desired_capabilities=DesiredCapabilities.CHROME)
             else:
