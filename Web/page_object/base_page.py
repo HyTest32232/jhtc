@@ -27,7 +27,7 @@ class BasePage:
             #hub模式
             elif broswer is not None and broswer.lower() == 'remote':
                 config = configparser.ConfigParser()
-                config.read(os.path.join(os.environ['USERPROFILE'], 'iselenium.ini'))
+                config.read(os.path.join(os.environ['HOME'], 'iselenium.ini'))
                 docker_remote = config.get('driver','remote')
                 self.driver = webdriver.Remote(command_executor=docker_remote,desired_capabilities=DesiredCapabilities.CHROME)
             else:
