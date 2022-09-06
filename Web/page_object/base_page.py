@@ -17,11 +17,12 @@ class BasePage:
         chrome_options.add_argument("no-sandbox")
         chrome_options.add_argument("disable-gpu")
         if base_driver == None:
-            #无头模式
+
             try:
                 broswer = os.environ["broswer"]
             except KeyError:
                 broswer = None
+            # 无头模式
             if broswer is not None and broswer.lower() == 'no_gui':
                 chrome_options.add_argument('headless')
                 self.driver = webdriver.Chrome(options=chrome_options)
