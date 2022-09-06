@@ -1,21 +1,36 @@
+import configparser
+import os
 from time import sleep
 
 from selenium import webdriver
+from selenium.webdriver import DesiredCapabilities
 from selenium.webdriver.common.by import By
 from selenium.webdriver.remote.webdriver import WebDriver
 from selenium.webdriver.chrome.options import Options
 
 class BasePage:
     _base_url = ""
-    def __init__(self,base_driver:WebDriver=None,):
+    def __init__(self,base_driver:WebDriver=None):
+        config = configparser.ConfigParser()
+        config.read(os.path.join(os.environ['USERPROFILE'],'iselenium.ini'))
         chrome_options = Options()
-        chrome_options.add_argument("headless")
         chrome_options.add_argument("no-sandbox")
-        chrome_options.add_argument('disable-dev-shm-usage')
-        chrome_options.add_argument('single-process')
         chrome_options.add_argument("disable-gpu")
         if base_driver == None:
-            self.driver = webdriver.Chrome(options=chrome_options)
+            #无头模式
+            try:
+                broswer = os.environ["broswer"]
+            except KeyError:
+                broswer = None
+            if broswer is not None and broswer.lower() == 'no_gui':
+                chrome_options.add_argument('headless')
+                self.driver = webdriver.Chrome(options=chrome_options)
+            #hub模式
+            elif broswer is not None and broswer.lower() == 'remote':
+                docker_remote = config.get('driver','remote')
+                self.driver = webdriver.Remote(command_executor=docker_remote,desired_capabilities=DesiredCapabilities.CHROME)
+            else:
+                self.driver = webdriver.Chrome(options=chrome_options)
             self.driver.get(self._base_url)
             self.driver.implicitly_wait(3)
             self.driver.maximize_window()
